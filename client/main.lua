@@ -1,21 +1,29 @@
-local visible = false
+local visible = true
 
-local function setVisible(state)
-    visible = state
+local function push(action, data)
     SendNUIMessage({
-        action = 'setVisible',
-        data = state,
+        action = action,
+        data = data,
     })
 end
 
 RegisterCommand('vitalhud', function()
-    setVisible(not visible)
+    visible = not visible
+    push('setVisible', visible)
 end, false)
+
+RegisterNetEvent('vital-hud:updateStats', function(stats)
+    if type(stats) ~= 'table' then
+        return
+    end
+
+    push('updateStats', stats)
+end)
 
 AddEventHandler('onClientResourceStart', function(resource)
     if resource ~= GetCurrentResourceName() then
         return
     end
 
-    setVisible(true)
+    push('setVisible', true)
 end)
