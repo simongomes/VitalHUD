@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Hud } from './hud/Hud'
 import { clampStat, defaultStats, type HudStats } from './hud/stats'
 
 type NuiMessage =
@@ -22,7 +23,7 @@ function mergeStats(current: HudStats, patch: Partial<HudStats> | undefined) {
 
 export default function App() {
   const [visible, setVisible] = useState(true)
-  const [, setStats] = useState<HudStats>(defaultStats)
+  const [stats, setStats] = useState<HudStats>(defaultStats)
 
   useEffect(() => {
     const onMessage = (event: MessageEvent<NuiMessage>) => {
@@ -44,5 +45,5 @@ export default function App() {
 
   if (!visible) return null
 
-  return null
+  return <Hud stats={stats} />
 }
