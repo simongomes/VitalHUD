@@ -9,13 +9,12 @@
   --stamina: #3ddc6a;
 
   position: fixed;
-  left: 50%;
-  bottom: 28px;
-  transform: translateX(-50%);
-  width: min(760px, calc(100vw - 32px));
+  left: 16px;
+  bottom: 16px;
+  width: min(420px, calc(100vw - 32px));
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   pointer-events: none;
   user-select: none;
   font-family: system-ui, 'Segoe UI', sans-serif;
@@ -24,28 +23,28 @@
 
 .panel {
   background: var(--hud-bg);
-  border-radius: 14px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
+  border-radius: 9px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.38);
 }
 
 .vitals {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .vital {
   display: grid;
-  grid-template-columns: 24px minmax(0, 1fr) auto;
+  grid-template-columns: 15px minmax(0, 1fr) auto;
   align-items: center;
-  column-gap: 14px;
-  height: 48px;
-  padding: 0 16px 0 14px;
+  column-gap: 8px;
+  height: 30px;
+  padding: 0 9px 0 8px;
 }
 
 .icon {
-  width: 24px;
-  height: 24px;
+  width: 15px;
+  height: 15px;
   display: block;
 }
 
@@ -58,7 +57,7 @@
 }
 
 .track {
-  height: 9px;
+  height: 5px;
   border-radius: 999px;
   background: var(--hud-track);
   overflow: hidden;
@@ -96,9 +95,9 @@
 }
 
 .vital-value {
-  min-width: 3.1em;
+  min-width: 2.5em;
   text-align: right;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 650;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
@@ -107,33 +106,33 @@
 .needs {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
+  gap: 4px;
 }
 
 .need {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 12px;
-  min-height: 78px;
-  padding: 12px 14px 11px;
+  gap: 6px;
+  min-height: 48px;
+  padding: 6px 7px 5px;
 }
 
 .need-main {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .need-icon {
-  width: 28px;
-  height: 28px;
+  width: 16px;
+  height: 16px;
   color: #fff;
   flex: none;
 }
 
 .need-value {
-  font-size: 22px;
+  font-size: 13px;
   font-weight: 720;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -141,15 +140,15 @@
 }
 
 .need-label {
-  margin-top: 4px;
-  font-size: 11px;
+  margin-top: 2px;
+  font-size: 8px;
   font-weight: 650;
   line-height: 1;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.78);
 }
 
 .need-track {
-  height: 5px;
+  height: 3px;
 }
