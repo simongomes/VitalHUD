@@ -10,11 +10,11 @@ const vitals: { key: Extract<HudStatKey, 'health' | 'armor'>; Icon: IconComponen
   { key: 'armor', Icon: ShieldIcon },
 ]
 
-const needs: { key: Exclude<HudStatKey, 'health' | 'armor'>; label: string; Icon: IconComponent }[] = [
-  { key: 'hunger', label: 'Hunger', Icon: UtensilsIcon },
-  { key: 'thirst', label: 'Thirst', Icon: DropletIcon },
-  { key: 'stress', label: 'Stress', Icon: BrainIcon },
-  { key: 'stamina', label: 'Stamina', Icon: RunnerIcon },
+const needs: { key: Exclude<HudStatKey, 'health' | 'armor'>; Icon: IconComponent }[] = [
+  { key: 'hunger', Icon: UtensilsIcon },
+  { key: 'thirst', Icon: DropletIcon },
+  { key: 'stress', Icon: BrainIcon },
+  { key: 'stamina', Icon: RunnerIcon },
 ]
 
 function formatPercent(value: number) {
@@ -41,14 +41,11 @@ export function Hud({ stats }: HudProps) {
       </div>
 
       <div className="needs">
-        {needs.map(({ key, label, Icon }) => (
+        {needs.map(({ key, Icon }) => (
           <div className="panel need" key={key}>
             <div className="need-main">
               <Icon className="icon need-icon" />
-              <div>
-                <div className="need-value">{formatPercent(stats[key])}</div>
-                <div className="need-label">{label}</div>
-              </div>
+              <div className="need-value">{formatPercent(stats[key])}</div>
             </div>
             <div className="track need-track" aria-hidden="true">
               <div className={`fill ${key}`} style={{ width: `${stats[key]}%` }} />

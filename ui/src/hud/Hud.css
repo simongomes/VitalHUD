@@ -1,6 +1,6 @@
 .hud {
-  --hud-bg: #1b212b;
-  --hud-track: #343b49;
+  --hud-bg: rgba(27, 33, 43, 0.78);
+  --hud-track: rgba(255, 255, 255, 0.16);
   --health: #ff4d5c;
   --armor: #3b93ff;
   --hunger: #f5b01f;
@@ -11,10 +11,10 @@
   position: fixed;
   left: 16px;
   bottom: 16px;
-  width: min(420px, calc(100vw - 32px));
+  width: min(280px, calc(100vw - 32px));
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   pointer-events: none;
   user-select: none;
   font-family: system-ui, 'Segoe UI', sans-serif;
@@ -30,16 +30,16 @@
 .vitals {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .vital {
   display: grid;
-  grid-template-columns: 15px minmax(0, 1fr) auto;
+  grid-template-columns: 14px minmax(0, 1fr) auto;
   align-items: center;
-  column-gap: 8px;
-  height: 30px;
-  padding: 0 9px 0 8px;
+  column-gap: 6px;
+  height: 26px;
+  padding: 0 7px 0 6px;
 }
 
 .icon {
@@ -106,47 +106,35 @@
 .needs {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 4px;
+  gap: 3px;
 }
 
 .need {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 6px;
-  min-height: 48px;
-  padding: 6px 7px 5px;
+  gap: 4px;
+  padding: 5px 6px 4px;
 }
 
 .need-main {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .need-icon {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   color: #fff;
   flex: none;
 }
 
 .need-value {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 720;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.03em;
-}
-
-.need-label {
-  margin-top: 2px;
-  font-size: 8px;
-  font-weight: 650;
-  line-height: 1;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
 }
 
 .need-track {
