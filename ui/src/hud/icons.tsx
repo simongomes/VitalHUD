@@ -81,6 +81,22 @@ export function BrainIcon({ className }: IconProps) {
   )
 }
 
+export function LungsIcon({ className }: IconProps) {
+  return (
+    <Icon className={className}>
+      <path fill="currentColor" d="M11.2 2.2h1.6v5.2h-1.6z" />
+      <path
+        fill="currentColor"
+        d="M11.6 7.6C9.2 8.2 6.6 10 5.6 12.8 4.4 16 5 19.4 7.2 20.8c1.6 1 3.2.2 3.6-1.4.3-1.4 0-2.8-.8-3.8.6-.4 1-1.1 1-1.9V7.6z"
+      />
+      <path
+        fill="currentColor"
+        d="M12.4 7.6c2.4.6 5 2.4 6 5.2 1.2 3.2.6 6.6-1.6 8-1.6 1-3.2.2-3.6-1.4-.3-1.4 0-2.8.8-3.8-.6-.4-1-1.1-1-1.9V7.6z"
+      />
+    </Icon>
+  )
+}
+
 export function RunnerIcon({ className }: IconProps) {
   return (
     <Icon className={className}>
