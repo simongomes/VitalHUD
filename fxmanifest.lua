@@ -5,7 +5,7 @@ lua54 'yes'
 name 'vital-hud'
 author 'PvtD3ADMAN'
 description 'Vital HUD'
-version '1.0.0'
+version '1.0.1'
 
 ui_page 'ui/dist/index.html'
 

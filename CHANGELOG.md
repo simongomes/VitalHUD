@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1] - 2026-11-09
+
+### Changed
+
+- The release build uses Node.js 24.
+
 ## [1.0.0] - 2026-11-08
 
 Initial release of Vital HUD.
