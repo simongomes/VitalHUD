@@ -13,16 +13,22 @@ function Join-Root([string]$Relative) {
     return Join-Path $root $Relative
 }
 
-function Invoke-Npm([string]$Arguments) {
+function Invoke-Npm([string]$NpmArguments) {
     $start = New-Object System.Diagnostics.ProcessStartInfo
-    $start.FileName = 'cmd.exe'
-    $start.Arguments = "/c npm $Arguments"
     $start.WorkingDirectory = Join-Root 'ui'
     $start.UseShellExecute = $false
+    # The release workflow runs on Linux, where cmd.exe does not exist.
+    if ($env:OS -eq 'Windows_NT') {
+        $start.FileName = 'cmd.exe'
+        $start.Arguments = "/c npm $NpmArguments"
+    } else {
+        $start.FileName = 'npm'
+        $start.Arguments = $NpmArguments
+    }
     $process = [System.Diagnostics.Process]::Start($start)
     $process.WaitForExit()
     if ($process.ExitCode -ne 0) {
-        throw "npm $Arguments failed."
+        throw "npm $NpmArguments failed."
     }
 }
 
