@@ -6,6 +6,8 @@ With horizontal health and armor bars, each bar is half of the first four bottom
 
 The page background is transparent, so the game stays visible. The HUD does not take mouse focus.
 
+GTA also draws a green health bar and a blue armor bar under the minimap. Those are separate from this HUD. `Config.HideNativeBars` hides them and leaves the minimap on screen. Health and armor gameplay stay the same.
+
 ## Requirements
 
 - A FiveM server
@@ -84,6 +86,18 @@ Config.Display = {
 
 `vitalBars` changes health and armor. `'horizontal'` keeps the wide bars. `'vertical'` uses the same upright meter as the other components.
 
+`Config.HideNativeBars` hides GTA's health and armor bars under the minimap. It is on by default. Set it to `false` to show those bars again.
+
+Stopping `qbx_hud` removes the Qbox HUD only. That resource also replaces the minimap graphic, so stopping it brings the default green and blue bars back. VitalHUD hides them from `client/main.lua`, which `fxmanifest.lua` already loads. Do not add a separate `client.lua` or replace the manifest.
+
+Restart the resource after changing `config.lua`:
+
+```
+restart VitalHUD
+```
+
+If the native bars stay visible, another resource is resetting the minimap afterward. `qbx_hud` does that while it is still started.
+
 ## In game
 
 `/vitalhud` shows or hides the HUD. Rename it with `Config.Command`.
@@ -101,6 +115,8 @@ TriggerEvent('vital-hud:updateStats', {
 ```
 
 Each value is a percentage from 0 to 100. A message can include any subset of the stats. Automatic sources keep reading the ped, natives, or player state, so this event does not override them.
+
+When the page loads, it posts a `ready` callback. The client answers with the current display, components, stats, and visibility, so a message sent before the page exists is not the one the HUD keeps.
 
 The interface also listens for NUI messages:
 
