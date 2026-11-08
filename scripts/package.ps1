@@ -92,7 +92,7 @@ if ([System.IO.Directory]::Exists($staging)) {
 [System.IO.Directory]::CreateDirectory((Join-Path $resource 'client')) | Out-Null
 [System.IO.Directory]::CreateDirectory((Join-Path $resource 'server')) | Out-Null
 
-foreach ($name in @('fxmanifest.lua', 'config.lua', 'README.md', 'CHANGELOG.md', 'hud-ui-preview.png', 'game-preview.png')) {
+foreach ($name in @('fxmanifest.lua', 'config.lua', 'README.md', 'CHANGELOG.md', 'LICENSE', 'hud-ui-preview.png', 'game-preview.png')) {
     [System.IO.File]::Copy((Join-Root $name), (Join-Path $resource $name), $true)
 }
 [System.IO.File]::Copy((Join-Root 'client/main.lua'), (Join-Path $resource 'client/main.lua'), $true)
