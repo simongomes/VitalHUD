@@ -126,7 +126,3 @@ The interface also listens for NUI messages:
 | `setComponents` | `{ health, armor, hunger, thirst, stress, stamina, oxygen }` as booleans |
 | `setDisplay` | `{ bars, percentages, vitalBars }` — booleans, and `vitalBars` as `horizontal` or `vertical` |
 | `updateStats` | `{ health, armor, hunger, thirst, stress, stamina, oxygen }` |
-
-## Branches
-
-`master` is the main branch. `dev` is for ongoing work.
