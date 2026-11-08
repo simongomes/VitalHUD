@@ -1,6 +1,4 @@
-# Vital HUD
-
-By PvtD3ADMAN
+# Vital HUD - *by PvtD3ADMAN*
 
 A FiveM resource that draws a compact survival HUD in the bottom-left of the screen. Health and armor sit on the top row. Hunger, thirst, stress, stamina, and oxygen stay on a single row underneath.
 
@@ -19,6 +17,8 @@ GTA also draws a green health bar and a blue armor bar under the minimap. Those 
 - A FiveM server
 - Node.js 20 or newer, only needed to build the UI
 
+
+
 ## Project layout
 
 ```
@@ -28,6 +28,8 @@ client/main.lua   Reads vitals and updates the HUD
 server/main.lua   Server entry
 ui/               Vite, React, and TypeScript interface
 ```
+
+
 
 ## UI
 
@@ -50,15 +52,17 @@ The browser preview uses a black page so the HUD is easy to see. The production 
 
 The client reads vitals on a timer (`Config.UpdateInterval`) and pushes them to the UI when they change by at least `Config.MinChange` percent.
 
-| Vital | Default source | What it follows |
-| --- | --- | --- |
-| Health | Player ped | `(health - min) / (max - min)`. Default min is `100`. `nil` max uses the ped's max health. `qbx_medical` holds the ped at full health while dead and about `150` in last stand, so `zeroWhen` includes `isDead` and the bar shows `0` in both cases. |
-| Armor | Player ped | Armor divided by `Config.Stats.armor.max` (default `100`). |
-| Hunger | Player state `hunger` | Qbox metadata. `qbx_core` drains this on its own loop. |
-| Thirst | Player state `thirst` | Qbox metadata. `qbx_core` drains this on its own loop. |
-| Stress | Player state `stress` | Qbox metadata. Stress still rises from `qbx_hud` while that resource is running. |
-| Stamina | Sprint native | `100 - GetPlayerSprintStaminaRemaining`. Set `invert = false` if the bar moves the wrong way. |
-| Oxygen | Underwater breath | Full on land. Underwater it uses remaining breath against `maxSeconds` (default `10`). A longer breath, such as dive gear, raises the capacity from the first underwater sample. |
+
+| Vital   | Default source        | What it follows                                                                                                                                                                                                                                      |
+| ------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Health  | Player ped            | `(health - min) / (max - min)`. Default min is `100`. `nil` max uses the ped's max health. `qbx_medical` holds the ped at full health while dead and about `150` in last stand, so `zeroWhen` includes `isDead` and the bar shows `0` in both cases. |
+| Armor   | Player ped            | Armor divided by `Config.Stats.armor.max` (default `100`).                                                                                                                                                                                           |
+| Hunger  | Player state `hunger` | Qbox metadata. `qbx_core` drains this on its own loop.                                                                                                                                                                                               |
+| Thirst  | Player state `thirst` | Qbox metadata. `qbx_core` drains this on its own loop.                                                                                                                                                                                               |
+| Stress  | Player state `stress` | Qbox metadata. Stress still rises from `qbx_hud` while that resource is running.                                                                                                                                                                     |
+| Stamina | Sprint native         | `100 - GetPlayerSprintStaminaRemaining`. Set `invert = false` if the bar moves the wrong way.                                                                                                                                                        |
+| Oxygen  | Underwater breath     | Full on land. Underwater it uses remaining breath against `maxSeconds` (default `10`). A longer breath, such as dive gear, raises the capacity from the first underwater sample.                                                                     |
+
 
 `Config.Framework` is `'auto'`, `'qbx'`, `'qb'`, or `'standalone'`. Auto prefers `qbx_core`, then `qb-core`. State bag values win, then framework metadata, then the stat default. Standalone keeps hunger, thirst, and stress at their defaults unless that stat's `source` is `'manual'`.
 
@@ -126,9 +130,19 @@ When the page loads, it posts a `ready` callback. The client answers with the cu
 
 The interface also listens for NUI messages:
 
-| Action | Data |
-| --- | --- |
-| `setVisible` | `true` or `false` |
-| `setComponents` | `{ health, armor, hunger, thirst, stress, stamina, oxygen }` as booleans |
-| `setDisplay` | `{ bars, percentages, vitalBars }` — booleans, and `vitalBars` as `horizontal` or `vertical` |
-| `updateStats` | `{ health, armor, hunger, thirst, stress, stamina, oxygen }` |
+
+| Action          | Data                                                                                         |
+| --------------- | -------------------------------------------------------------------------------------------- |
+| `setVisible`    | `true` or `false`                                                                            |
+| `setComponents` | `{ health, armor, hunger, thirst, stress, stamina, oxygen }` as booleans                     |
+| `setDisplay`    | `{ bars, percentages, vitalBars }` — booleans, and `vitalBars` as `horizontal` or `vertical` |
+| `updateStats`   | `{ health, armor, hunger, thirst, stress, stamina, oxygen }`                                 |
+
+
+
+
+## Contributor
+
+![simongomes](https://github.com/simongomes.png?size=40)
+
+[simongomes](https://github.com/simongomes)
