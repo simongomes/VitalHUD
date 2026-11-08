@@ -16,6 +16,12 @@ type NuiMessage =
   | { action: 'setDisplay'; data?: Partial<HudDisplay> }
   | { action: 'updateStats'; data?: Partial<HudStats> }
 
+declare global {
+  interface Window {
+    GetParentResourceName?: () => string
+  }
+}
+
 function isStatKey(key: string): key is keyof HudStats {
   return key in defaultStats
 }
@@ -59,6 +65,16 @@ export default function App() {
   const [stats, setStats] = useState<HudStats>(defaultStats)
 
   useEffect(() => {
+    const resource = window.GetParentResourceName?.()
+
+    if (resource) {
+      fetch(`https://${resource}/ready`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{}',
+      }).catch(() => {})
+    }
+
     const onMessage = (event: MessageEvent<NuiMessage>) => {
       const message = event.data
       if (!message || typeof message !== 'object') return
