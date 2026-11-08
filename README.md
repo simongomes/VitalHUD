@@ -141,6 +141,18 @@ The interface also listens for NUI messages:
 
 
 
+## Performance
+
+Vitals are read on a timer. The default is 200 ms (`Config.UpdateInterval`). A stat is sent to the page only after it changes by at least `Config.MinChange` percent, which defaults to 1.
+
+Hiding the minimap health and armor bars calls `SETUP_HEALTH_ARMOUR` once per frame. The game draws those bars again when that call stops, so the loop uses `Wait(0)` while `Config.HideNativeBars` is on. Set `Config.HideNativeBars` to `false` to remove that loop. The vital timer keeps its own interval.
+
+In game, run `resmon 1` and read the `VitalHUD` line while standing still. That figure is the one to put on a Cfx.re release topic.
+
+## License
+
+[MIT](LICENSE)
+
 ## Contributor
 
 ![simongomes](https://github.com/simongomes.png?size=40)
