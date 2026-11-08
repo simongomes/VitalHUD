@@ -1,6 +1,12 @@
 # Vital HUD
 
+By PvtD3ADMAN
+
 A FiveM resource that draws a compact survival HUD in the bottom-left of the screen. Health and armor sit on the top row. Hunger, thirst, stress, stamina, and oxygen stay on a single row underneath.
+
+![Vital HUD interface, with health, armor, hunger, thirst, stress, stamina, and oxygen labeled](hud-ui-preview.png)
+
+![Vital HUD in game on a Los Santos street](game-preview.png)
 
 With horizontal health and armor bars, each bar is half of the first four bottom components. Health lines up with hunger and thirst. Armor lines up with stress and stamina. Oxygen continues past the armor bar. Set `vitalBars` to `'vertical'` to use the same upright meter as the other components.
 

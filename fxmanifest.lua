@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 
 name 'vital-hud'
-author 'vital'
+author 'PvtD3ADMAN'
 description 'Vital HUD'
 version '1.0.0'
 
