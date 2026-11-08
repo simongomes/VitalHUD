@@ -138,6 +138,8 @@ finally {
 }
 
 $noteBody = if ($notes.Count -gt 0) { ($notes -join "`n").Trim() } else { "Vital HUD $version" }
+$repoUrl = 'https://github.com/simongomes/VitalHUD'
+$noteBody = "$noteBody`n`nCheck the repository for configuration and how to use and modify the HUD: $repoUrl`n"
 [System.IO.File]::WriteAllText($notesPath, $noteBody)
 [System.IO.Directory]::Delete($staging, $true)
 
