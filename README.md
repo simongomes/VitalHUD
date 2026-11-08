@@ -15,8 +15,8 @@ The page background is transparent, so the game stays visible. The HUD does not 
 
 ```
 fxmanifest.lua    Resource manifest
-config.lua        Which HUD components are shown
-client/main.lua   Shows the HUD and forwards stat updates
+config.lua        Vital sources, visibility, and HUD layout
+client/main.lua   Reads vitals and updates the HUD
 server/main.lua   Server entry
 ui/               Vite, React, and TypeScript interface
 ```
@@ -38,7 +38,27 @@ The browser preview uses a black page so the HUD is easy to see. The production 
 
 ## Settings
 
-`config.lua` controls which components are drawn. Set a value to `false` to hide that component, then restart the resource. Every component is shown by default.
+`config.lua` controls the HUD. Restart the resource after changing it.
+
+The client reads vitals on a timer (`Config.UpdateInterval`) and pushes them to the UI when they change by at least `Config.MinChange` percent.
+
+| Vital | Default source | What it follows |
+| --- | --- | --- |
+| Health | Player ped | `(health - min) / (max - min)`. Default min is `100`. `nil` max uses the ped's max health. `qbx_medical` holds the ped at full health while dead and about `150` in last stand, so `zeroWhen` includes `isDead` and the bar shows `0` in both cases. |
+| Armor | Player ped | Armor divided by `Config.Stats.armor.max` (default `100`). |
+| Hunger | Player state `hunger` | Qbox metadata. `qbx_core` drains this on its own loop. |
+| Thirst | Player state `thirst` | Qbox metadata. `qbx_core` drains this on its own loop. |
+| Stress | Player state `stress` | Qbox metadata. Stress still rises from `qbx_hud` while that resource is running. |
+| Stamina | Sprint native | `100 - GetPlayerSprintStaminaRemaining`. Set `invert = false` if the bar moves the wrong way. |
+| Oxygen | Underwater breath | Full on land. Underwater it uses remaining breath against `maxSeconds` (default `10`). A longer breath, such as dive gear, raises the capacity from the first underwater sample. |
+
+`Config.Framework` is `'auto'`, `'qbx'`, `'qb'`, or `'standalone'`. Auto prefers `qbx_core`, then `qb-core`. State bag values win, then framework metadata, then the stat default. Standalone keeps hunger, thirst, and stress at their defaults unless that stat's `source` is `'manual'`.
+
+`Config.Visibility.hideOnPause` hides the HUD while the pause menu is open. `requireLogin` defaults to on for Qbox and QB, and off for standalone. The login flag is the `isLoggedIn` state bag.
+
+`Config.HideAt` hides a component while its displayed percent equals a number. For example, `armor = 0` hides an empty armor bar. Omit a key to keep showing that component.
+
+`config.lua` also controls which components are drawn. Set a value to `false` to hide that component. Every component is shown by default.
 
 ```lua
 Config.Components = {
@@ -66,23 +86,21 @@ Config.Display = {
 
 ## In game
 
-`/vitalhud` shows or hides the HUD.
+`/vitalhud` shows or hides the HUD. Rename it with `Config.Command`.
 
-Other client scripts can push stats:
+The HUD stays hidden until the player is logged in, and while the pause menu is open.
+
+Other client scripts can drive a stat after its `source` is set to `'manual'`:
 
 ```lua
 TriggerEvent('vital-hud:updateStats', {
-    health = 80,
-    armor = 40,
     hunger = 60,
     thirst = 55,
     stress = 20,
-    stamina = 90,
-    oxygen = 100,
 })
 ```
 
-Each value is a percentage from 0 to 100. A message can include any subset of those stats.
+Each value is a percentage from 0 to 100. A message can include any subset of the stats. Automatic sources keep reading the ped, natives, or player state, so this event does not override them.
 
 The interface also listens for NUI messages:
 
