@@ -1,39 +1,14 @@
-# React + TypeScript + Vite
+# Vital HUD interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React and TypeScript page for the Vital HUD resource. The resource docs, config, and in-game behavior are in the parent [README](../README.md).
 
-Currently, two official plugins are available:
+FiveM loads the production build at `ui/dist/index.html`. The page background is transparent in that build. The dev server uses a black page so the HUD is easy to see.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-  },
-])
+```bash
+npm install
+npm run dev      # browser preview at http://127.0.0.1:5173
+npm run build    # writes ui/dist
+npm run lint
 ```
+
+The preview shows sample stats. In game, `client/main.lua` replaces those values. On load, the page posts `ready` so the client can push the current vitals.

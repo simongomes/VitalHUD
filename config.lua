@@ -12,6 +12,10 @@ Config.MinChange = 1
 -- Chat command that shows or hides the HUD.
 Config.Command = 'vitalhud'
 
+-- Hide GTA's green health and blue armor bars under the minimap.
+-- Stopping qbx_hud does not hide these. The minimap itself stays visible.
+Config.HideNativeBars = true
+
 -- 'auto' uses qbx_core, then qb-core, then standalone.
 -- 'qbx' and 'qb' read hunger, thirst, and stress from player state, which qbx_core already updates.
 -- 'standalone' leaves those three at their defaults unless a stat source is 'manual'.

@@ -458,6 +458,28 @@ if commandName ~= '' then
     end, false)
 end
 
+if Config.HideNativeBars ~= false then
+    CreateThread(function()
+        local minimap = RequestScaleformMovie('minimap')
+
+        while not HasScaleformMovieLoaded(minimap) do
+            Wait(0)
+        end
+
+        -- Reload the minimap once so the health and armor layout applies.
+        SetRadarBigmapEnabled(true, false)
+        Wait(0)
+        SetRadarBigmapEnabled(false, false)
+
+        while true do
+            BeginScaleformMovieMethod(minimap, 'SETUP_HEALTH_ARMOUR')
+            ScaleformMovieMethodAddParamInt(3)
+            EndScaleformMovieMethod()
+            Wait(0)
+        end
+    end)
+end
+
 CreateThread(function()
     local delay = tonumber(Config.StartupDelay) or 0
 
