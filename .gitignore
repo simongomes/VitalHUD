@@ -32,3 +32,6 @@ pnpm-debug.log*
 
 # Local
 *.local
+
+# Built release zips
+release/
